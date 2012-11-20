@@ -3,10 +3,12 @@ package fr.dubois.space.invader;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
@@ -82,7 +84,14 @@ public class SpaceInvaderView extends View {
 		this.setMeasuredDimension(x,y);
 	}
 	
-	
+    public void loadTile(int res) {
+        Bitmap bitmap = Bitmap.createBitmap(mTileSize, mTileSize, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        tile.setBounds(0, 0, mTileSize, mTileSize);
+        tile.draw(canvas);
+        
+        return bitmap;
+    }
 
 }
 
