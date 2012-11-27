@@ -16,6 +16,11 @@ public class SpaceInvaderView extends View {
 	// Dimensions souhaitées
 	private static final int TARGET_HEIGHT = 800;
 	private static final int TARGET_WIDTH = 600;
+
+	private Bitmap alienbitmap;
+	
+
+
 	private Paint paint; // Style pour le texte	
 	private String text; // texte à afficher
 	Alien alien;
@@ -76,8 +81,8 @@ public class SpaceInvaderView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int x = computeSize(widthMeasureSpec,TARGET_WIDTH);
-		int y = computeSize(heightMeasureSpec,TARGET_HEIGHT);
+		int x=drawable.getintrinsicWidth();
+		int y=drawable.getIntrinsicHeight();
 		this.setMeasuredDimension(x,y);
 	}
 	
