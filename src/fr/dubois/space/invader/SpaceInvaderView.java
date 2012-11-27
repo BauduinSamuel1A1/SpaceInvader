@@ -2,7 +2,6 @@ package fr.dubois.space.invader;
 
 
 
-import android.R.drawable;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
