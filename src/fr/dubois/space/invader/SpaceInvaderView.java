@@ -2,6 +2,7 @@ package fr.dubois.space.invader;
 
 
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -9,7 +10,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+
 import android.graphics.drawable.Drawable;
+
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -18,14 +21,14 @@ public class SpaceInvaderView extends View {
 	// Dimensions souhaitées
 	private static final int TARGET_HEIGHT = 800;
 	private static final int TARGET_WIDTH = 600;
+
+	private Bitmap alienbitmap;
 	
-	
-	private Bitmap alienbitmp;
 
 	private Paint paint; // Style pour le texte	
-	private String text; // texte à afficher
-	
-	
+
+	private String text; // texte a afficher
+
 	Alien alien;
 
 
@@ -43,12 +46,11 @@ public class SpaceInvaderView extends View {
 		super(context, attrs);
 		init();
 	}
-
-
 	
-
 	void init(){
-		alien = new Alien(null, 0, 0);
+
+		alien = new Alien(alienbitmap, 0, 0);
+
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setColor(Color.YELLOW);
@@ -101,12 +103,6 @@ public class SpaceInvaderView extends View {
 	
 	
 
-
-
-
-
-
-
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -115,6 +111,8 @@ public class SpaceInvaderView extends View {
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
+		alien.draw(canvas);
+		
 	}
 
 
@@ -132,9 +130,10 @@ public class SpaceInvaderView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int x = computeSize(widthMeasureSpec,TARGET_WIDTH);
-		int y = computeSize(heightMeasureSpec,TARGET_HEIGHT);
-		this.setMeasuredDimension(x,y);
-	}
 
+	}
+	
 }
+
+
+
