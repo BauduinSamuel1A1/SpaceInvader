@@ -19,6 +19,7 @@ public class SpaceInvaderView extends View {
 	private static final int TARGET_HEIGHT = 800;
 	private static final int TARGET_WIDTH = 600;
 	
+	
 	private Bitmap alienbitmp;
 
 	private Paint paint; // Style pour le texte	
