@@ -79,9 +79,7 @@ public class SpaceInvaderView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int x=drawable.getintrinsicWidth();
-		int y=drawable.getIntrinsicHeight();
-		this.setMeasuredDimension(x,y);
+
 	}
 	
 }
