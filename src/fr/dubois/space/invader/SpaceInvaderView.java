@@ -2,6 +2,7 @@ package fr.dubois.space.invader;
 
 
 
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -9,6 +10,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+
+import android.graphics.drawable.Drawable;
+
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -17,10 +21,14 @@ public class SpaceInvaderView extends View {
 	// Dimensions souhaitÃ©es
 	private static final int TARGET_HEIGHT = 800;
 	private static final int TARGET_WIDTH = 600;
+
 	private Bitmap alienbitmap;
 	
+
 	private Paint paint; // Style pour le texte	
+
 	private String text; // texte a afficher
+
 	Alien alien;
 
 
@@ -40,7 +48,9 @@ public class SpaceInvaderView extends View {
 	}
 	
 	void init(){
+
 		alien = new Alien(alienbitmap, 0, 0);
+
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setColor(Color.YELLOW);
@@ -50,6 +60,48 @@ public class SpaceInvaderView extends View {
 		text = "Texte";
 	}
 
+	
+	
+	
+	
+	
+	/*
+	 Méthode loadImage()
+	 Obtention du drawable à partir de l'identifiant
+	 Définition de la taille intrinsèque du drawable dans les variables x et y
+	 Création d'un bitmap aux dimensions intrinsèques, et du caneva associé
+	 Définition de la taille du tracé, et tracé, et tracé de l'image
+	 Retour de l'image créée
+	 */
+	public Bitmap loadImage(int id) {
+		
+		Drawable tmp = this.getContext().getResources().getDrawable(id);
+        int y=tmp.getIntrinsicWidth();
+		int x=tmp.getIntrinsicHeight();
+		
+		Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        
+        Drawable image = null;
+		image.setBounds(0, 0, x, y);
+        image.draw(canvas);
+        
+        return bitmap;
+    }
+	/*
+	private void initSnakeView() {
+        setFocusable(true);
+
+        Resources r = this.getContext().getResources();
+        
+        resetImage(4);
+        loadImage(GALAXIE, r.getDrawable(R.drawable.Galaxie));
+        loadImage(PACMAN_NOIR, r.getDrawable(R.drawable.Pacman_Noir));
+        loadImage(PACMAN_ROUGE, r.getDrawable(R.drawable.Pacman_Rouge));
+    	
+    }*/
+	
+	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
