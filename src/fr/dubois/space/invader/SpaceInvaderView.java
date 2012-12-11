@@ -1,8 +1,5 @@
 package fr.dubois.space.invader;
 
-
-
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -31,7 +28,6 @@ public class SpaceInvaderView extends View {
 
 	Alien alien;
 
-
 	public SpaceInvaderView(Context context) {
 		super(context);
 		init();
@@ -49,22 +45,18 @@ public class SpaceInvaderView extends View {
 	
 	void init(){
 
-		alien = new Alien(alienbitmap, 0, 0);
-
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setColor(Color.YELLOW);
 		paint.setTypeface(Typeface.SANS_SERIF);
 		paint.setTextSize(36);
 		paint.setTextAlign(Paint.Align.CENTER);
-		text = "Texte";
+		
+		text = "Game Over";
+		alienbitmap = loadImage(R.drawable.pacmannoir);
+		alien = new Alien(alienbitmap, 0, 0);
 	}
 
-	
-	
-	
-	
-	
 	/*
 	 Méthode loadImage()
 	 Obtention du drawable à partir de l'identifiant
@@ -73,48 +65,32 @@ public class SpaceInvaderView extends View {
 	 Définition de la taille du tracé, et tracé, et tracé de l'image
 	 Retour de l'image créée
 	 */
+	
 	public Bitmap loadImage(int id) {
 		
 		Drawable tmp = this.getContext().getResources().getDrawable(id);
-        int y=tmp.getIntrinsicWidth();
-		int x=tmp.getIntrinsicHeight();
+        int x=tmp.getIntrinsicWidth();
+		int y=tmp.getIntrinsicHeight();
 		
 		Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         
-        Drawable image = null;
-		image.setBounds(0, 0, x, y);
-        image.draw(canvas);
+		tmp.setBounds(0, 0, x, y);
+        tmp.draw(canvas);
         
         return bitmap;
     }
-	/*
-	private void initSnakeView() {
-        setFocusable(true);
-
-        Resources r = this.getContext().getResources();
-        
-        resetImage(4);
-        loadImage(GALAXIE, r.getDrawable(R.drawable.Galaxie));
-        loadImage(PACMAN_NOIR, r.getDrawable(R.drawable.Pacman_Noir));
-        loadImage(PACMAN_ROUGE, r.getDrawable(R.drawable.Pacman_Rouge));
-    	
-    }*/
-	
-	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		canvas.drawRGB(0, 0, 0);
 		canvas.drawRect(0, 0, TARGET_WIDTH-1, TARGET_HEIGHT-1, paint);
+		alien.draw(canvas);
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
-		alien.draw(canvas);
-		
 	}
-
 
 	private int computeSize(int spec,int def){
 		int mode = View.MeasureSpec.getMode(spec);
@@ -130,10 +106,9 @@ public class SpaceInvaderView extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
+		int x = computeSize(widthMeasureSpec,TARGET_WIDTH);		
+		int y = computeSize(heightMeasureSpec,TARGET_HEIGHT);		
+		this.setMeasuredDimension(x,y);
 	}
 	
 }
-
-
-
