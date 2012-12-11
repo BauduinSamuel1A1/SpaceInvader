@@ -1,10 +1,5 @@
 package fr.dubois.space.invader;
 
-
-
-
-import com.example.android.snake.SnakeView.RefreshHandler;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -33,7 +28,6 @@ public class SpaceInvaderView extends View {
 
 	Alien alien;
 
-
 	public SpaceInvaderView(Context context) {
 		super(context);
 		init();
@@ -50,24 +44,17 @@ public class SpaceInvaderView extends View {
 	}
 	
 	void init(){
-
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setColor(Color.YELLOW);
 		paint.setTypeface(Typeface.SANS_SERIF);
 		paint.setTextSize(36);
 		paint.setTextAlign(Paint.Align.CENTER);
-		text = "Texte";
-		alienbitmap = loadImage(R.drawable.alien1);
-		alien = new Alien (alienbitmap, 0,0);
+		text = "Game Over";
+		alienbitmap = loadImage(R.drawable.pacmannoir);
+		alien = new Alien(alienbitmap, 0, 0);
 	}
 
-	
-	
-	
-
-	
-	
 	/*
 	 Méthode loadImage()
 	 Obtention du drawable à partir de l'identifiant
@@ -76,6 +63,7 @@ public class SpaceInvaderView extends View {
 	 Définition de la taille du tracé, et tracé, et tracé de l'image
 	 Retour de l'image créée
 	 */
+	
 	public Bitmap loadImage(int id) {
 		
 		Drawable tmp = this.getContext().getResources().getDrawable(id);
@@ -84,16 +72,10 @@ public class SpaceInvaderView extends View {
 		
 		Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        
-        //Drawable image = null;
 		tmp.setBounds(0, 0, x, y);
         tmp.draw(canvas);
-        
         return bitmap;
     }
-	
-	
-	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -104,10 +86,7 @@ public class SpaceInvaderView extends View {
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
-		alien.draw(canvas);
-		
 	}
-
 
 	private int computeSize(int spec,int def){
 		int mode = View.MeasureSpec.getMode(spec);
@@ -126,19 +105,6 @@ public class SpaceInvaderView extends View {
 		int x = computeSize(widthMeasureSpec, TARGET_WIDTH);
 		int y = computeSize(heightMeasureSpec, TARGET_HEIGHT);
 		this.setMeasuredDimension(x,y);
-		
-
 	}
-	private RefreshHandler mRedrawHandler = new RefreshHandler();
-	
-	
-	
 }
-
-
-
-
-
-
-
-
+	
