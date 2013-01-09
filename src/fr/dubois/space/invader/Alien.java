@@ -20,6 +20,7 @@ public class Alien extends Sprite {
 
 	@Override
 	public void act() {
+		x = x+2;
 		// TODO Auto-generated method stub
 		
 	}
