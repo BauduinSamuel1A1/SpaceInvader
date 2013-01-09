@@ -20,6 +20,7 @@ public class SpaceInvaderView extends View {
 	private static final int TARGET_WIDTH = 600;
 
 	private Bitmap alienbitmap;
+	private Bitmap shipbitmap;
 	
 
 	private Paint paint; // Style pour le texte	
@@ -27,6 +28,7 @@ public class SpaceInvaderView extends View {
 	private String text; // texte a afficher
 
 	Alien alien;
+	Ship ship;
 
 	public SpaceInvaderView(Context context) {
 		super(context);
@@ -53,6 +55,9 @@ public class SpaceInvaderView extends View {
 		text = "Game Over";
 		alienbitmap = loadImage(R.drawable.pacmannoir);
 		alien = new Alien(alienbitmap, 0, 0);
+		
+		alienbitmap = loadImage(R.drawable.ship);
+		ship = new Ship(shipbitmap, 0, 0);
 	}
 
 	/*
@@ -83,6 +88,7 @@ public class SpaceInvaderView extends View {
 		canvas.drawRGB(0, 0, 0);
 		canvas.drawRect(0, 0, TARGET_WIDTH-1, TARGET_HEIGHT-1, paint);
 		alien.draw(canvas);
+		ship.draw(canvas);
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
