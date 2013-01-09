@@ -7,9 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
-
 import android.graphics.drawable.Drawable;
-
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -21,6 +21,22 @@ public class SpaceInvaderView extends View {
 
 	private Bitmap alienbitmap;
 	
+	private RefreshHandler mRedrawHandler = new RefreshHandler();
+	
+	public class RefreshHandler extends Handler {
+		
+        @Override
+        public void handleMessage(Message msg) {
+            SpaceInvaderView.this.update();
+            SpaceInvaderView.this.invalidate();
+        }
+
+        public void sleep(long delayMillis) {
+        	this.removeMessages(0);
+            sendMessageDelayed(obtainMessage(0), delayMillis);
+        }
+        
+	}
 
 	private Paint paint; // Style pour le texte	
 
@@ -32,6 +48,7 @@ public class SpaceInvaderView extends View {
 		super(context);
 		init();
 	}
+
 
 	public SpaceInvaderView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -53,17 +70,17 @@ public class SpaceInvaderView extends View {
 		text = "Game Over";
 		alienbitmap = loadImage(R.drawable.pacmannoir);
 		alien = new Alien(alienbitmap, 0, 0);
+	
+        this.update();
+
+	}
+	
+	public void update() {
+		// TODO Auto-generated method stub
+		alien.act();
+		mRedrawHandler.sleep(40);
 	}
 
-	/*
-	 Méthode loadImage()
-	 Obtention du drawable à partir de l'identifiant
-	 Définition de la taille intrinsèque du drawable dans les variables x et y
-	 Création d'un bitmap aux dimensions intrinsèques, et du caneva associé
-	 Définition de la taille du tracé, et tracé, et tracé de l'image
-	 Retour de l'image créée
-	 */
-	
 	public Bitmap loadImage(int id) {
 		
 		Drawable tmp = this.getContext().getResources().getDrawable(id);
